@@ -49,7 +49,7 @@ pnpm dev
 
 6. Visit http://localhost:3000
 
-7. Visit http://localhost:4000/api/docs
+7. Visit http://localhost:4001/api
 
 If you need to install new packages, you can add to the respective app folder:
 

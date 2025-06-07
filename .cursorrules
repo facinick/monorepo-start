@@ -1,0 +1,231 @@
+# Monorepo Architecture and Development Guidelines
+
+## Project Structure
+```
+monorepo/
+├── apps/
+│   ├── web/           # Next.js frontend application
+│   │   ├── app/       # Next.js app router pages
+│   │   ├── components/# React components
+│   │   ├── hooks/     # Custom React hooks
+│   │   ├── lib/       # Shared utilities
+│   │   ├── services/  # API services
+│   │   └── types/     # TypeScript types
+│   └── api/           # NestJS backend application
+│       ├── src/
+│       │   ├── controllers/
+│       │   ├── services/
+│       │   ├── repositories/
+│       │   └── types/
+├── packages/
+│   ├── ui/            # Shared UI components
+│   ├── eslint-config/ # Shared ESLint config
+│   └── typescript-config/ # Shared TS config
+```
+
+## Tech Stack
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **Backend**: NestJS
+- **State Management**: React Query (TanStack Query)
+- **Styling**: Tailwind CSS
+- **Form Handling**: React Hook Form + Zod
+- **Authentication**: NextAuth.js
+- **Build Tools**: Turborepo, pnpm workspaces
+
+## Architectural Guidelines
+
+### 1. Component Architecture
+- Use functional components with hooks
+- Keep components pure and focused
+- Extract business logic to custom hooks
+- Use composition over inheritance
+
+### 2. State Management
+- Use React Query for server state
+- Use React's useState/useReducer for local state
+- Use Context for theme/auth/global state
+- Avoid prop drilling - use context or composition
+- Keep state as local as possible
+
+### 3. API and Data Fetching
+- Use React Query for data fetching
+- Implement proper error boundaries
+- Use Zod for runtime type validation
+- Follow RESTful conventions
+- Implement proper loading states
+
+### 4. Type Safety
+- Enable strict TypeScript mode
+- Use explicit return types
+- Avoid 'any' type
+- Use zod for runtime validation
+- Keep types close to their usage
+
+### 5. Testing Strategy
+- Unit tests for utilities and hooks
+- Component tests with React Testing Library
+- E2E tests with Playwright
+- API tests with Jest
+- Maintain 80%+ coverage
+
+## Naming Conventions
+
+### Files and Folders
+- Use kebab-case for files: `user-profile.tsx`
+- Use PascalCase for components: `UserProfile`
+- Use camelCase for utilities: `formatDate.ts`
+- Group related files in feature folders
+
+### Code
+- Use PascalCase for components
+- Use camelCase for functions/variables
+- Use UPPER_CASE for constants
+- Prefix hooks with 'use': `useAuth`
+- Prefix types with 'T': `TUser`
+
+## Best Practices
+
+### 1. Performance
+- Implement proper code splitting
+- Use React.memo for expensive renders
+- Optimize images and assets
+- Implement proper caching strategies
+- Monitor bundle sizes
+
+### 2. Security
+- Validate all inputs with Zod
+- Implement proper CORS policies
+- Use environment variables for secrets
+- Implement rate limiting
+- Follow OWASP guidelines
+
+### 3. Accessibility
+- Use semantic HTML
+- Implement proper ARIA attributes
+- Ensure keyboard navigation
+- Maintain color contrast
+- Test with screen readers
+
+### 4. Error Handling
+- Use error boundaries
+- Implement proper logging
+- Show user-friendly error messages
+- Handle edge cases gracefully
+- Implement retry mechanisms
+
+## Development Workflow
+
+### 1. Adding New Features
+1. Create feature branch
+2. Add tests first (TDD)
+3. Implement feature
+4. Add documentation
+5. Create PR with description
+
+### 2. Code Review Guidelines
+- Check for type safety
+- Verify error handling
+- Review accessibility
+- Check performance impact
+- Verify test coverage
+
+### 3. Documentation
+- Document complex logic
+- Keep README up to date
+- Document API changes
+- Add JSDoc comments
+- Update changelog
+
+## TODO: Missing Best Practices
+
+1. **Analytics Integration**
+   - Implement proper event tracking
+   - Add analytics middleware
+   - Set up error tracking
+
+2. **Feature Flags**
+   - Implement feature toggle system
+   - Add environment-based flags
+   - Document feature flag usage
+
+3. **Monitoring**
+   - Set up performance monitoring
+   - Implement error tracking
+   - Add user behavior analytics
+
+4. **CI/CD**
+   - Add automated deployment
+   - Implement staging environment
+   - Add performance budgets
+
+5. **Documentation**
+   - Add API documentation
+   - Create component storybook
+   - Add architecture diagrams
+
+## Anti-patterns to Avoid
+
+1. ❌ Don't use class components
+2. ❌ Don't use prop drilling
+3. ❌ Don't use 'any' type
+4. ❌ Don't mix state management solutions
+5. ❌ Don't skip error handling
+6. ❌ Don't ignore accessibility
+7. ❌ Don't commit secrets
+8. ❌ Don't skip tests
+9. ❌ Don't use inline styles
+10. ❌ Don't ignore performance
+
+## Development Tools
+
+### Required Extensions
+- ESLint
+- Prettier
+- TypeScript
+- Tailwind CSS IntelliSense
+- GitLens
+
+### Recommended Settings
+```json
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
+```
+
+## Getting Started
+
+1. Install dependencies:
+   ```bash
+   pnpm install
+   ```
+
+2. Start development:
+   ```bash
+   pnpm dev
+   ```
+
+3. Run tests:
+   ```bash
+   pnpm test
+   ```
+
+4. Build:
+   ```bash
+   pnpm build
+   ```
+
+## Contributing
+
+1. Fork the repository
+2. Create feature branch
+3. Commit changes
+4. Push to branch
+5. Create Pull Request
+
+## License
+
+MIT License - see LICENSE file for details 
